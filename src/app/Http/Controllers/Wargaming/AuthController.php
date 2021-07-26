@@ -40,7 +40,7 @@ class AuthController extends Controller
                 $nickname = $_GET['nickname'];
 
                 $searchUser = $user->query()
-                    ->where('account_id','=',$account_id)
+                    ->where('wg_account_id','=',$account_id)
                     ->limit(1)
                     ->get();
 
@@ -51,9 +51,9 @@ class AuthController extends Controller
                 if ( sizeof($searchUser) ) {
                     // Если пользователь найден обновляем данные либо авторизуем его
                     $data = [
-                        'nickname' => $nickname,
-                        'access_token' => $access_token,
-                        'expires_at' => date('Y-m-d H:i:s', $expires_at),
+                        'wg_nickname' => $nickname,
+                        'wg_access_token' => $access_token,
+                        'wg_expires_at' => date('Y-m-d H:i:s', $expires_at),
                     ];
 
                     if ( !$user::findOrFail($searchUser[0]->id)->update($data) ) {
@@ -80,7 +80,7 @@ class AuthController extends Controller
 
                 if ( $user->save() ) {
                     // Сохранение успешно, можно проходить Аутентификацию
-                    if ( \Auth::attempt(['account_id' => $account_id, 'password' => $password], false) ) {
+                    if ( \Auth::attempt(['wg_account_id' => $account_id, 'password' => $password], false) ) {
                         // Аутентификация успешна...
                         return redirect()
                             ->route('index')
