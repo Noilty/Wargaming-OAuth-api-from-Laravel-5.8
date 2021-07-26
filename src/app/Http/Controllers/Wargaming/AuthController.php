@@ -71,11 +71,11 @@ class AuthController extends Controller
                     }
                 }
 
-                $user->region = $region;
-                $user->nickname = $nickname;
-                $user->account_id = $account_id;
-                $user->access_token = $access_token;
-                $user->expires_at = date('Y-m-d H:i:s', $expires_at);
+                $user->wg_region = $region;
+                $user->wg_nickname = $nickname;
+                $user->wg_account_id = $account_id;
+                $user->wg_access_token = $access_token;
+                $user->wg_expires_at = date('Y-m-d H:i:s', $expires_at);
                 $user->password = Hash::make($password);
 
                 if ( $user->save() ) {
