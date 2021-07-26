@@ -110,7 +110,7 @@ class AuthController extends Controller
             }
 
             return redirect()
-                ->route('not_authorized.index')
+                ->route('index')
                 ->with('danger','Ошибка ' . $error_code);
         }
     }
